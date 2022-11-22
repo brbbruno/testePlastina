@@ -1,0 +1,55 @@
+// Import the express with express name
+import express from 'express';
+
+// Initialize the express module with app variable
+const app: express.Application = express();
+
+let fake_db: any = [];
+
+// Define the port for the application is run
+const port: number = 3000;
+
+// Handle the comming data.
+app.use(express.json());
+
+// Handle '/', path of the api.
+app.get('/', (_req, _res): void => {
+    _res.json({
+        'name': 'typescritp_api',
+        'path': '/',
+        'work': 'search_other_apis'
+    });
+});
+
+
+// Server the api endpints.
+app.listen(port, (): void => {
+    console.log(`Typescript API server http://localhost:${port}/`);
+});
+
+
+
+// Handle '/create', path for create user
+app.post('/create', (_req, _res): void => {
+
+    // Fatched the user using body data
+    // const user: object = _req.body;
+    class user { username: string; password: string;}
+
+    // Asigen the user in fake_db with id as a index
+    fake_db.push(user);
+
+    _res.json({
+        "success": true,
+        "data": user
+    });
+});
+
+
+// Handle '/users', path for fatch users.
+app.get('/users', (_req, _res): void => {
+    _res.json({
+        "success": true,
+        "users": fake_db
+    });
+})
